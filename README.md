@@ -17,13 +17,95 @@ It is really easy to use and add to your app. It only takes an array of `Double`
 - Enable/disable haptic feedback when drag on exact value
 - Use SwiftUI modifiers to custom chart (like background or frame size)
 
+## Installation
+
+Add `LineChartView` package to your project. 
+
+In Xcode 13.1: `File` -> `Add Packages...` then enter my project GitHub URL:  
+`https://github.com/Jonathan-Gander/LineChartView`
+
 ## Usage
 
-First create a `LineChartParameters` and set parameters to customize your brand you chart. Only first `data` parameter is mandatory to provide your values (as an array of `Double`).
+### Quick first chart
+In file you want to add a chart:
 
-Then create a `LineChartView` by passing your `LineChartParameter`.
+```swift
+import LineChartView
+```
 
-## I'm working on...
+Then first create a `LineChartParameters` and set parameters to customize your brand new chart. Only first `data` parameter is mandatory to provide your values (as an array of `Double`):
+
+```swift
+let chartParameters = LineChartParameters(data: [42.0, 25.8, 88.19, 15.0])
+```
+
+Then create a `LineChartView` by passing your `LineChartParameter`:
+
+```swift
+LineChartView(lineChartParameters: chartParameters)
+```
+
+### Complete example
+
+Here is an example of a `View` displaying a chart with values and labels, and set its height:
+
+```swift
+import SwiftUI
+import LineChartView
+
+struct ContentView: View {
+    
+    private let data: [Double] = [42.0, 25.8, 88.19, 15.0]
+    private let labels: [String] = ["The answer", "Birthday", "2021-11-21", "My number"]
+    
+    var body: some View {
+        
+        let chartParameters = LineChartParameters(data: data)
+        LineChartView(lineChartParameters: chartParameters)
+            .frame(height: 300)
+    }
+}
+```
+
+## Customize your chart
+
+To customize your chart, you can set parameters of `LineChartParameters`. Here are explanations of each parameter:
+
+- `data`: Array of `Double` containing values to display
+- `dataLabels`: Array of `String` containing label for each value
+- `labelColor`: Color of values text
+- `secondaryLabelColor`: Color of labels text
+- `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
+- `indicatorPointColor`: Color of indicator point displayed when user drag finger on chart
+- `indicatorPointSize`: Size of indicator point
+- `lineColor`: First color of line
+- `lineSecondColor`: If set, will display a linear gradient from left to right from `lineColor` to `lineSecondColor`
+- `lineWidth`: Line width
+- `dotsWidth`: Display a dot for each value (set to `-1` to hide dots)
+- `dragGesture`: Enable or disable drag gesture on chart
+- `hapticFeedback`: Enable or disable haptic feedback on each value point
+
+Example of a complete `LineChartParameters`:
+
+```swift
+let chartParameters = LineChartParameters(
+    data: data,
+    dataLabels: labels,
+    labelColor: .primary,
+    secondaryLabelColor: .secondary,
+    labelsAlignment: .left,
+    indicatorPointColor: .blue,
+    indicatorPointSize: 20,
+    lineColor: .blue,
+    lineSecondColor: .purple,
+    lineWidth: 3,
+    dotsWidth: 8,
+    dragGesture: true,
+    hapticFeedback: true
+)
+```
+
+## I'm working on...
 
 🚧 Developer at work 🚧
 
