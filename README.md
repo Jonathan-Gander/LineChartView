@@ -17,16 +17,37 @@ It is really easy to use and add to your app. It only takes an array of `Double`
 - Enable/disable haptic feedback when drag on exact value
 - Use SwiftUI modifiers to custom chart (like background or frame size)
 
-## Installation
+## Examples
+
+### Default basic version (without any customization):
+
+![Basic light](https://user-images.githubusercontent.com/1695222/143007122-fda76cd6-db04-41a8-bde3-d4cc6a28ea36.png)
+
+![Basic dark](https://user-images.githubusercontent.com/1695222/143007298-c454db5b-b636-4e68-91e5-c1eeff4a8749.png)
+
+### Examples with customizations:
+
+![Custom 1](https://user-images.githubusercontent.com/1695222/143007907-7acd8f2e-3e04-452f-9a04-67fdceeb80af.png)
+
+![Custom 2](https://user-images.githubusercontent.com/1695222/143008445-e532c171-a659-42b9-b2c6-49c5bacda214.png)
+
+![Custom 3](https://user-images.githubusercontent.com/1695222/143009005-f1def92c-4679-4fca-a6dc-5fab3c161eb9.png)
+
+![Custom 4](https://user-images.githubusercontent.com/1695222/143009330-71530e2b-a7d0-4766-9b19-2fb000147486.png)
+
+![Custom 5](https://user-images.githubusercontent.com/1695222/143010489-88d4d4b0-1ab8-4b77-adf0-337513be3426.png)
+
+
+## Usage
+
+### Installation
 
 Add `LineChartView` package to your project. 
 
 In Xcode 13.1: `File` -> `Add Packages...` then enter my project GitHub URL:  
 `https://github.com/Jonathan-Gander/LineChartView`
 
-## Usage
-
-### Quick first chart
+### Quick start
 In file you want to add a chart:
 
 ```swift
