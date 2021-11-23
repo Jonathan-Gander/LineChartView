@@ -2,7 +2,7 @@
 
 `LineChartView` is a Swift Package written in SwiftUI to add a line chart to your app. It has many available customizations and is interactive (user can move finger on line to get values details).
 
-It is really easy to use and add to your app. It only takes an array of `Double` values as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
+It is really easy to use and to add to your app. It only takes an array of `Double` values as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
 
 ## Features
 
@@ -15,7 +15,7 @@ It is really easy to use and add to your app. It only takes an array of `Double`
 - Display dots for each point/value on line
 - Enable/disable drag gesture
 - Enable/disable haptic feedback when drag on exact value
-- Use SwiftUI modifiers to custom chart (like background or frame size)
+- Use SwiftUI modifiers to customize chart (like background or frame size)
 
 ## Examples
 
@@ -54,7 +54,7 @@ In file you want to add a chart:
 import LineChartView
 ```
 
-Then first create a `LineChartParameters` and set parameters to customize your brand new chart. Only first `data` parameter is mandatory to provide your values (as an array of `Double`):
+First create a `LineChartParameters` and set parameters to customize your chart. Only first `data` parameter is mandatory to provide your values (as an array of `Double`):
 
 ```swift
 let chartParameters = LineChartParameters(data: [42.0, 25.8, 88.19, 15.0])
@@ -77,10 +77,9 @@ import LineChartView
 struct ContentView: View {
     
     private let data: [Double] = [42.0, 25.8, 88.19, 15.0]
-    private let labels: [String] = ["The answer", "Birthday", "2021-11-21", "My number"]
+    private let labels: [String] = ["The answer", "Any text here", "2021-11-21", "My number"]
     
     var body: some View {
-        
         let chartParameters = LineChartParameters(data: data, dataLabels: labels)
         LineChartView(lineChartParameters: chartParameters)
             .frame(height: 300)
@@ -97,7 +96,7 @@ To customize your chart, you can set parameters of `LineChartParameters`. Here a
 - `labelColor`: Color of values text
 - `secondaryLabelColor`: Color of labels text
 - `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
-- `indicatorPointColor`: Color of indicator point displayed when user drag finger on chart
+- `indicatorPointColor`: Color of indicator point displayed when user drags finger on chart
 - `indicatorPointSize`: Size of indicator point
 - `lineColor`: First color of line
 - `lineSecondColor`: If set, will display a linear gradient from left to right from `lineColor` to `lineSecondColor`
