@@ -111,6 +111,9 @@ let chartParameters = LineChartParameters(
 
 - Animation when line is drawn
 
+## They're already using it
+
+If you use my `LineChartView` in your app, please let me know and I will add your link here. You can [contact me here](https://contact.gander.family?locale=en).
 
 ## Licence
 
