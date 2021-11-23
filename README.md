@@ -60,7 +60,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        let chartParameters = LineChartParameters(data: data)
+        let chartParameters = LineChartParameters(data: data, dataLabels: labels)
         LineChartView(lineChartParameters: chartParameters)
             .frame(height: 300)
     }
