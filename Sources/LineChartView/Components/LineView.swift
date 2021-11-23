@@ -20,6 +20,9 @@ public struct LineView: View {
     
     public var gradient: LinearGradient
     
+    // For animation
+    @State private var animationPercentage: CGFloat = .zero
+    
     // For haptic feedback (detection)
     @State public var currentPreviousPoint: CGPoint?
     @State public var isOnLimits: Bool = false
@@ -43,7 +46,13 @@ public struct LineView: View {
                          width: proxy.size.width, height: proxy.size.height,
                          dotsSize: lineChartParameters.dotsWidth,
                          pathPoints: $pathPoints)
+                    .trim(from: .zero, to: animationPercentage)
                     .stroke(gradient, lineWidth: lineChartParameters.lineWidth)
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 2)) {
+                            animationPercentage = 1.0
+                        }
+                    }
             }
             
             if showingIndicators {

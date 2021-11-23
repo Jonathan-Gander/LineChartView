@@ -15,6 +15,11 @@ public struct LinePath: Shape {
     
     @Binding var pathPoints: [CGPoint]
     
+    var animatableData: [Double] {
+        get { data }
+        set { data = newValue }
+    }
+    
     public func path(in rect: CGRect) -> Path {
         var path = Path()
         var pathPoints = [CGPoint]()
