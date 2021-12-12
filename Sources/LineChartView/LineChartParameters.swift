@@ -14,6 +14,7 @@ public class LineChartParameters {
     // MARK: - Data
     public var data: [Double]
     public var dataLabels: [String]?
+    public var dataTimestamps: [Date]?
     
     // MARK: - Style
     public var labelColor: Color
@@ -36,6 +37,7 @@ public class LineChartParameters {
     public init(
         data: [Double],
         dataLabels: [String]? = nil,
+        dataTimestamps: [Date]?, // A timestamp for each data value. If set, will draw x values according to timestamps. This array has to have exact same items as data array.
         
         labelColor: Color = .primary,
         secondaryLabelColor: Color = .secondary,
@@ -56,6 +58,12 @@ public class LineChartParameters {
         self.data = data
         self.dataLabels = dataLabels
         self.labelColor = labelColor
+        
+        // dataTimestamps must have same number of items than data array
+        if dataTimestamps != nil && dataTimestamps!.count == data.count {
+            self.dataTimestamps = dataTimestamps
+        }
+        
         self.secondaryLabelColor = secondaryLabelColor
         self.labelsAlignment = labelsAlignment
         self.indicatorPointColor = indicatorPointColor

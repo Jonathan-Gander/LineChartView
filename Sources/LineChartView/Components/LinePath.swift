@@ -15,18 +15,48 @@ public struct LinePath: Shape {
     
     @Binding var pathPoints: [CGPoint]
     
+    var pathTimestamps: [Date]?
+    
     public func path(in rect: CGRect) -> Path {
         var path = Path()
         var pathPoints = [CGPoint]()
         
+        // Case of x values are timestamps
+        let isXTimestamps = pathTimestamps != nil
+        var firstTimestamp: TimeInterval? = nil
+        var widthForASecond: Double? = nil
+        if isXTimestamps {
+            firstTimestamp = pathTimestamps!.first!.timeIntervalSince1970
+            let lastTimestamp  = pathTimestamps!.last!.timeIntervalSince1970
+            
+            let totalSeconds = lastTimestamp - firstTimestamp!
+            widthForASecond = Double(width) / totalSeconds
+        }
+        
+        
         let widthBetweenDataPoints = Double(width) / Double(data.count - 1)  // Remove first point
         let initialPoint = data[0] * Double(height)
-        var x: Double = -widthBetweenDataPoints
+        var x: Double = isXTimestamps ? 0 : -widthBetweenDataPoints
         
         path.move(to: CGPoint(x: 0, y: initialPoint))
+        var i = 0
         for y in data {
-            x += widthBetweenDataPoints
+            
+            // Calculate x position
+            if isXTimestamps && firstTimestamp != nil && widthForASecond != nil {
+                // When x values are timestamps, need to calculate x value depending on timestamp (= space between each)
+                let currentSecondsFromFirst = pathTimestamps![i].timeIntervalSince1970 - firstTimestamp!
+                x = currentSecondsFromFirst * widthForASecond!
+                i+=1
+            }
+            else {
+                // 'Classical' case (all x values have equal spaces between each)
+                x += widthBetweenDataPoints
+            }
+            
+            // Calculate y position
             let y = y * Double(height)
+            
             path.addLine(to: CGPoint(x: x, y: y))
             
             // Note: As it's not possible to add stroke() + fill() to LinePath(), I had to draw

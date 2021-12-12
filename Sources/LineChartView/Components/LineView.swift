@@ -42,7 +42,8 @@ public struct LineView: View {
                 LinePath(data: data,
                          width: proxy.size.width, height: proxy.size.height,
                          dotsSize: lineChartParameters.dotsWidth,
-                         pathPoints: $pathPoints)
+                         pathPoints: $pathPoints,
+                         pathTimestamps: lineChartParameters.dataTimestamps)
                     .stroke(gradient, lineWidth: lineChartParameters.lineWidth)
             }
             
