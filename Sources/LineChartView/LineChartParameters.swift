@@ -37,7 +37,7 @@ public class LineChartParameters {
     public init(
         data: [Double],
         dataLabels: [String]? = nil,
-        dataTimestamps: [Date]?, // A timestamp for each data value. If set, will draw x values according to timestamps. This array has to have exact same items as data array.
+        dataTimestamps: [Date]? = nil, // A timestamp for each data value. If set, will draw x values according to timestamps. This array has to have exact same items as data array.
         
         labelColor: Color = .primary,
         secondaryLabelColor: Color = .secondary,
