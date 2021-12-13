@@ -4,7 +4,10 @@
 
 It is really easy to use and to add to your app. It only takes an array of `Double` values as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
 
-Discussion about x axis values: By default, all values are displayed on x axis with equal distance between them. But you can also provide a timestamp (`Date`) for each value. In this case, values are displayed on x axis depending on timestamp. For example, if you have 3 values with timestamps 03:00, 03:30 and 08:00, space between first and second one will be smaller than space between second and third one. It lets you display a line chart as time serie instead of just a value serie.
+## 🆕 Value serie or time serie as x axis
+By default, all values are displayed on x axis with equal distance between them (value serie). But you can also provide a timestamp (`Date` object) for each value. In this case, values are displayed on x axis depending on timestamp. For example, if you have 3 values with timestamps 03:00, 03:30 and 08:00, space between first and second one will be smaller than space between second and third one. It lets you display a line chart as time serie instead of just a value serie.
+
+To set your chart as a time serie, simply set `dataTimestamps` parameter with an array of `Date` (one for each point).
 
 ## Features
 
@@ -69,7 +72,7 @@ Then create a `LineChartView` by passing your `LineChartParameter`:
 LineChartView(lineChartParameters: chartParameters)
 ```
 
-### Complete example
+### Complete examples
 
 Here is an example of a `View` displaying a chart with values and labels, and set its height:
 
@@ -124,9 +127,9 @@ struct ContentView: View {
 
 To customize your chart, you can set parameters of `LineChartParameters`. Here are explanations of each parameter:
 
-- `data`: Array of `Double` containing values to display
-- `dataLabels`: Array of `String` containing label for each value
+- `data`: (mandatory) Array of `Double` containing values to display
 - `dataTimestamps`: Array of `Date` containing timestamp for each value (time serie). This array must have same number of items than `data` array. Set to nil to display default value serie.
+- `dataLabels`: Array of `String` containing label for each value
 - `labelColor`: Color of values text
 - `secondaryLabelColor`: Color of labels text
 - `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
@@ -164,7 +167,7 @@ let chartParameters = LineChartParameters(
 
 🚧 Developer at work 🚧
 
-- Animation when line is drawn
+- Animation when line is drawn ([issue #2](https://github.com/Jonathan-Gander/LineChartView/issues/2))
 
 ## They're already using it
 
