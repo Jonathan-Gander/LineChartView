@@ -69,46 +69,6 @@ Then create a `LineChartView` by passing your `LineChartParameter`:
 LineChartView(lineChartParameters: chartParameters)
 ```
 
-## Customize your chart
-
-To customize your chart, you can set parameters of `LineChartParameters`. Here are explanations of each parameter:
-
-- `data`: Array of `Double` containing values to display
-- `dataLabels`: Array of `String` containing label for each value
-- `dataTimestamps`: Array of `Date` containing timestamp for each value (time serie). This array must have same number of items than `data` array. Set to nil to display default value serie.
-- `labelColor`: Color of values text
-- `secondaryLabelColor`: Color of labels text
-- `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
-- `indicatorPointColor`: Color of indicator point displayed when user drags finger on chart
-- `indicatorPointSize`: Size of indicator point
-- `lineColor`: First color of line
-- `lineSecondColor`: If set, will display a linear gradient from left to right from `lineColor` to `lineSecondColor`
-- `lineWidth`: Line width
-- `dotsWidth`: Display a dot for each value (set to `-1` to hide dots)
-- `dragGesture`: Enable or disable drag gesture on chart
-- `hapticFeedback`: Enable or disable haptic feedback on each value point
-
-Example of a complete `LineChartParameters`:
-
-```swift
-let chartParameters = LineChartParameters(
-    data: data,
-    dataLabels: labels,
-    dataTimestamps: timestamps,
-    labelColor: .primary,
-    secondaryLabelColor: .secondary,
-    labelsAlignment: .left,
-    indicatorPointColor: .blue,
-    indicatorPointSize: 20,
-    lineColor: .blue,
-    lineSecondColor: .purple,
-    lineWidth: 3,
-    dotsWidth: 8,
-    dragGesture: true,
-    hapticFeedback: true
-)
-```
-
 ### Complete example
 
 Here is an example of a `View` displaying a chart with values and labels, and set its height:
@@ -138,7 +98,6 @@ import LineChartView
 
 struct ContentView: View {
     private let data: [Double] = [42.0, 25.8, 88.19, 15.0]
-    private let labels: [String] = ["The answer", "Any text here", "Hello world", "My number"]
     private var timestamps: [Date] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -152,11 +111,53 @@ struct ContentView: View {
     }
     
     var body: some View {
-        let chartParameters = LineChartParameters(data: data, dataLabels: labels, dataTimestamps: timestamps)
+        let chartParameters = LineChartParameters(data: data,
+                                                  dataTimestamps: timestamps,
+                                                  dataLabels: timestamps.map({ $0.formatted(date: .numeric, time: .standard) }))
         LineChartView(lineChartParameters: chartParameters)
             .frame(height: 300)
     }
 }
+```
+
+## Customize your chart
+
+To customize your chart, you can set parameters of `LineChartParameters`. Here are explanations of each parameter:
+
+- `data`: Array of `Double` containing values to display
+- `dataLabels`: Array of `String` containing label for each value
+- `dataTimestamps`: Array of `Date` containing timestamp for each value (time serie). This array must have same number of items than `data` array. Set to nil to display default value serie.
+- `labelColor`: Color of values text
+- `secondaryLabelColor`: Color of labels text
+- `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
+- `indicatorPointColor`: Color of indicator point displayed when user drags finger on chart
+- `indicatorPointSize`: Size of indicator point
+- `lineColor`: First color of line
+- `lineSecondColor`: If set, will display a linear gradient from left to right from `lineColor` to `lineSecondColor`
+- `lineWidth`: Line width
+- `dotsWidth`: Display a dot for each value (set to `-1` to hide dots)
+- `dragGesture`: Enable or disable drag gesture on chart
+- `hapticFeedback`: Enable or disable haptic feedback on each value point
+
+Example of a complete `LineChartParameters`:
+
+```swift
+let chartParameters = LineChartParameters(
+    data: data,
+    dataTimestamps: timestamps,
+    dataLabels: labels,
+    labelColor: .primary,
+    secondaryLabelColor: .secondary,
+    labelsAlignment: .left,
+    indicatorPointColor: .blue,
+    indicatorPointSize: 20,
+    lineColor: .blue,
+    lineSecondColor: .purple,
+    lineWidth: 3,
+    dotsWidth: 8,
+    dragGesture: true,
+    hapticFeedback: true
+)
 ```
 
 ## I'm working on...

@@ -13,8 +13,8 @@ public class LineChartParameters {
     
     // MARK: - Data
     public var data: [Double]
-    public var dataLabels: [String]?
     public var dataTimestamps: [Date]?
+    public var dataLabels: [String]?
     
     // MARK: - Style
     public var labelColor: Color
@@ -36,8 +36,8 @@ public class LineChartParameters {
     
     public init(
         data: [Double],
+        dataTimestamps: [Date]? = nil, // A timestamp for each data value. If set, will draw x values according to timestamps. This array has to have exact same number of items as data array.
         dataLabels: [String]? = nil,
-        dataTimestamps: [Date]? = nil, // A timestamp for each data value. If set, will draw x values according to timestamps. This array has to have exact same items as data array.
         
         labelColor: Color = .primary,
         secondaryLabelColor: Color = .secondary,
@@ -56,14 +56,14 @@ public class LineChartParameters {
         hapticFeedback: Bool = false
     ) {
         self.data = data
-        self.dataLabels = dataLabels
-        self.labelColor = labelColor
         
         // dataTimestamps must have same number of items than data array
         if dataTimestamps != nil && dataTimestamps!.count == data.count {
             self.dataTimestamps = dataTimestamps
         }
         
+        self.dataLabels = dataLabels
+        self.labelColor = labelColor
         self.secondaryLabelColor = secondaryLabelColor
         self.labelsAlignment = labelsAlignment
         self.indicatorPointColor = indicatorPointColor
