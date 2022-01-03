@@ -40,10 +40,17 @@ public struct ChartLabels: View {
             
             VStack(alignment: lineChartParameters.labelsAlignment == .left ? .leading : lineChartParameters.labelsAlignment == .right ? .trailing : .center) {
                 if  lineChartParameters.data.count > indexPosition {
-                    Text(String(format: "%.2f", lineChartParameters.data[indexPosition]))
-                        .foregroundColor(lineChartParameters.labelColor)
-                        .font(.title)
-                        .fontWeight(.bold)
+                    if #available(iOS 15.0, *) {
+                        Text(lineChartParameters.data[indexPosition].formatted(.number.precision(.fractionLength(lineChartParameters.dataFractionLength))))
+                            .foregroundColor(lineChartParameters.labelColor)
+                            .font(.title)
+                            .fontWeight(.bold)
+                    } else {
+                        Text(String(format: "%.2f", lineChartParameters.data[indexPosition]))
+                            .foregroundColor(lineChartParameters.labelColor)
+                            .font(.title)
+                            .fontWeight(.bold)
+                    }
                 }
             
                 if labels.count > indexPosition {
