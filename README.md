@@ -134,7 +134,7 @@ To customize your chart, you can set parameters of `LineChartParameters`. Here a
 - `labelColor`: Color of values text
 - `secondaryLabelColor`: Color of labels text
 - `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
-- `dataFractionLength`: Number of digits after the decimal point. Default to `2`. Warning: Only available on iOS 15+.
+- `dataPrecisionLength`: Number of digits after the decimal point (round value). Default to `2`. Warning: Only available on iOS 15+.
 - `indicatorPointColor`: Color of indicator point displayed when user drags finger on chart
 - `indicatorPointSize`: Size of indicator point
 - `lineColor`: First color of line
@@ -154,7 +154,7 @@ let chartParameters = LineChartParameters(
     labelColor: .primary,
     secondaryLabelColor: .secondary,
     labelsAlignment: .left,
-    dataFractionLength: 0,
+    dataPrecisionLength: 0,
     indicatorPointColor: .blue,
     indicatorPointSize: 20,
     lineColor: .blue,
