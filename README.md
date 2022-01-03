@@ -16,6 +16,7 @@ To set your chart as a time serie, simply set `dataTimestamps` parameter with an
 - Add labels to each value (as `String`)
 - Change label (value) and secondary label colors
 - Change labels alignment (left, center, right)
+- Change number of digits after decimal point
 - Change indicator point color and size
 - Change line color (simple color or linear gradient with two colors)
 - Display dots for each point/value on line
@@ -133,6 +134,7 @@ To customize your chart, you can set parameters of `LineChartParameters`. Here a
 - `labelColor`: Color of values text
 - `secondaryLabelColor`: Color of labels text
 - `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
+- `dataPrecisionLength`: Number of digits after the decimal point (round value). Default to `2`. Warning: Only available on iOS 15+.
 - `indicatorPointColor`: Color of indicator point displayed when user drags finger on chart
 - `indicatorPointSize`: Size of indicator point
 - `lineColor`: First color of line
@@ -152,6 +154,7 @@ let chartParameters = LineChartParameters(
     labelColor: .primary,
     secondaryLabelColor: .secondary,
     labelsAlignment: .left,
+    dataPrecisionLength: 0,
     indicatorPointColor: .blue,
     indicatorPointSize: 20,
     lineColor: .blue,

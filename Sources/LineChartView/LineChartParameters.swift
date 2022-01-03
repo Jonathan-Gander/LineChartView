@@ -21,6 +21,8 @@ public class LineChartParameters {
     public var secondaryLabelColor: Color
     public var labelsAlignment: ChartLabels.Alignment
     
+    public var dataPrecisionLength: Int
+    
     public var indicatorPointColor: Color
     public var indicatorPointSize: CGFloat
     
@@ -42,6 +44,8 @@ public class LineChartParameters {
         labelColor: Color = .primary,
         secondaryLabelColor: Color = .secondary,
         labelsAlignment: ChartLabels.Alignment = .left,
+        
+        dataPrecisionLength: Int = 2, // Only available on iOS 15+
         
         indicatorPointColor: Color = .blue,
         indicatorPointSize: CGFloat = 20,
@@ -66,6 +70,7 @@ public class LineChartParameters {
         self.labelColor = labelColor
         self.secondaryLabelColor = secondaryLabelColor
         self.labelsAlignment = labelsAlignment
+        self.dataPrecisionLength = dataPrecisionLength
         self.indicatorPointColor = indicatorPointColor
         self.indicatorPointSize = indicatorPointSize
         self.lineColor = lineColor
