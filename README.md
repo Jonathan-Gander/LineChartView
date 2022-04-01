@@ -4,16 +4,15 @@
 
 It is really easy to use and to add to your app. It only takes an array of `Double` values as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
 
-## 🆕 Value serie or time serie as x axis
-By default, all values are displayed on x axis with equal distance between them (value serie). But you can also provide a timestamp (`Date` object) for each value. In this case, values are displayed on x axis depending on timestamp. For example, if you have 3 values with timestamps 03:00, 03:30 and 08:00, space between first and second one will be smaller than space between second and third one. It lets you display a line chart as time serie instead of just a value serie.
-
-To set your chart as a time serie, simply set `dataTimestamps` parameter with an array of `Date` (one for each point).
+## 🆕 Prefix and suffix to values
+You can now add a prefix and/or a suffix to add to your values when displayed. For example, if your values are kilograms, you can add a suffix ` kg` to display `42 kg` instead of only `42`.
 
 ## Features
 
 - Displays `Double` values in a line chart
 - Support value serie (by default) or time serie
 - Add labels to each value (as `String`)
+- Add prefix and/or suffix to displayed data (as "42 kg" for example)
 - Change label (value) and secondary label colors
 - Change labels alignment (left, center, right)
 - Change number of digits after decimal point
@@ -23,6 +22,11 @@ To set your chart as a time serie, simply set `dataTimestamps` parameter with an
 - Enable/disable drag gesture
 - Enable/disable haptic feedback when drag on exact value
 - Use SwiftUI modifiers to customize chart (like background or frame size)
+
+## Value serie or time serie as x axis
+By default, all values are displayed on x axis with equal distance between them (value serie). But you can also provide a timestamp (`Date` object) for each value. In this case, values are displayed on x axis depending on timestamp. For example, if you have 3 values with timestamps 03:00, 03:30 and 08:00, space between first and second one will be smaller than space between second and third one. It lets you display a line chart as time serie instead of just a value serie.
+
+To set your chart as a time serie, simply set `dataTimestamps` parameter with an array of `Date` (one for each point).
 
 ## Examples
 
@@ -135,6 +139,8 @@ To customize your chart, you can set parameters of `LineChartParameters`. Here a
 - `secondaryLabelColor`: Color of labels text
 - `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
 - `dataPrecisionLength`: Number of digits after the decimal point (round value). Default to `2`. Warning: Only available on iOS 15+.
+- `dataPrefix`: Text displayed before data value (for example: "$" to display "$42")
+- `dataSuffix`: Text displayed after data value (for example: " kg" to display "42 kg")
 - `indicatorPointColor`: Color of indicator point displayed when user drags finger on chart
 - `indicatorPointSize`: Size of indicator point
 - `lineColor`: First color of line
@@ -155,6 +161,8 @@ let chartParameters = LineChartParameters(
     secondaryLabelColor: .secondary,
     labelsAlignment: .left,
     dataPrecisionLength: 0,
+    dataPrefix: nil,
+    dataSuffix: " kg",
     indicatorPointColor: .blue,
     indicatorPointSize: 20,
     lineColor: .blue,
