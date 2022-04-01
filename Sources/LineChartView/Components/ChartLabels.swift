@@ -41,7 +41,7 @@ public struct ChartLabels: View {
             VStack(alignment: lineChartParameters.labelsAlignment == .left ? .leading : lineChartParameters.labelsAlignment == .right ? .trailing : .center) {
                 if  lineChartParameters.data.count > indexPosition {
                     if #available(iOS 15.0, *) {
-                        Text(lineChartParameters.data[indexPosition].formatted(.number.precision(.fractionLength(lineChartParameters.dataPrecisionLength))))
+                        Text("\(lineChartParameters.dataPrefix ?? "")\(lineChartParameters.data[indexPosition].formatted(.number.precision(.fractionLength(lineChartParameters.dataPrecisionLength))))\(lineChartParameters.dataSuffix ?? "")")
                             .foregroundColor(lineChartParameters.labelColor)
                             .font(.title)
                             .fontWeight(.bold)
