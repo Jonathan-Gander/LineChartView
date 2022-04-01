@@ -44,6 +44,8 @@ To set your chart as a time serie, simply set `dataTimestamps` parameter with an
 
 ![Custom 3](https://user-images.githubusercontent.com/1695222/143009005-f1def92c-4679-4fca-a6dc-5fab3c161eb9.png)
 
+![CHF](https://user-images.githubusercontent.com/1695222/161321934-2560c670-5a6d-46ca-8494-429943d18684.png)
+
 ![Custom 4](https://user-images.githubusercontent.com/1695222/143009330-71530e2b-a7d0-4766-9b19-2fb000147486.png)
 
 ![Custom 5](https://user-images.githubusercontent.com/1695222/143010489-88d4d4b0-1ab8-4b77-adf0-337513be3426.png)
