@@ -36,7 +36,7 @@ public class LineChartParameters {
     public var dotsWidth: CGFloat
     
     // MARK: - Interactions
-    public var dragGesture: Bool = false
+    public var dragGesture: Bool = true
     public var hapticFeedback: Bool = false
     
     public init(
