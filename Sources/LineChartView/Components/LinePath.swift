@@ -51,6 +51,8 @@ public struct LinePath: Shape {
                 path.addEllipse(in: CGRect(x: x-(j/2), y: y-(j/2), width: j, height: j))
             }
             
+            path.move(to: CGPoint(x: x, y: y))
+            
             // Append current point to an array. Later will be used for Drag Gesture
             pathPoints.append(path.currentPoint ?? CGPoint(x: 0, y: 0))
         }
