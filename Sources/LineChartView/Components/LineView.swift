@@ -42,6 +42,7 @@ public struct LineView: View {
                 LinePath(data: data,
                          width: proxy.size.width, height: proxy.size.height,
                          dotsSize: lineChartParameters.dotsWidth,
+                         lineWidth: lineChartParameters.lineWidth,
                          pathPoints: $pathPoints,
                          pathTimestamps: lineChartParameters.dataTimestamps)
                     .stroke(gradient, lineWidth: lineChartParameters.lineWidth)
@@ -102,7 +103,19 @@ public struct LineView: View {
      */
     public func dragGesture(_ longPressLocation: CGPoint) {
         
-        guard pathPoints.count > 1 else { return }
+        // Handle when chart has only one value
+        if pathPoints.count == 1 {
+            let x = pathPoints[0].x
+            let y = pathPoints[0].y
+            
+            self.IndicatorPointPosition.x = x
+            self.IndicatorPointPosition.y = y
+            
+            self.showingIndicators = true
+            self.indexPosition = 0
+            
+            return;
+        }
         
         var x = longPressLocation.x
         
