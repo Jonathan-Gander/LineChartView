@@ -196,6 +196,8 @@ public struct LineView: View {
     
     // Haptic feedback played when indicator is dragged on exact value (or limits)
     private func playHapticFeedback() {
+        #if os(iOS)
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        #endif
     }
 }
