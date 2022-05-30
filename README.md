@@ -23,7 +23,7 @@ It is really easy to use and to add to your app. It only takes an array of `Line
 ## Value serie or time serie as x axis
 By default, all values are displayed on x axis with equal distance between them (value serie). But you can also provide a timestamp (`Date` object) for each value. In this case, values are displayed on x axis depending on timestamp. For example, if you have 3 values with timestamps 03:00, 03:30 and 08:00, space between first and second one will be smaller than space between second and third one. It lets you display a line chart as time serie instead of just a value serie.
 
-To set your chart as a time serie, simply set `timestamp` value for each of your `LineChartData`.
+To set your chart as a time serie, simply set `timestamp` value for each of your `LineChartData`. Warning: All your `LineChartData` must have a `timestamp` to display chart as time serie. If one of them does not have it, it falls back to default value serie.
 
 ## Examples
 
