@@ -33,7 +33,7 @@ public struct LineView: View {
                                        startPoint: .leading,
                                        endPoint: .trailing)
         
-        data = normalize(data: lineChartParameters.data)
+        data = normalize(data: lineChartParameters.dataValues)
     }
     
     public var body: some View {

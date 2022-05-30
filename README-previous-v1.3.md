@@ -2,14 +2,17 @@
 
 `LineChartView` is a Swift Package written in SwiftUI to add a line chart to your app. It has many available customizations and is interactive (user can move finger on line to get values details).
 
-It is really easy to use and to add to your app. It only takes an array of `LineChartData` as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
+It is really easy to use and to add to your app. It only takes an array of `Double` values as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
+
+## 🆕 Prefix and suffix to values
+You can now add a prefix and/or a suffix to add to your values when displayed. For example, if your values are kilograms, you can add a suffix ` kg` to display `42 kg` instead of only `42`.
 
 ## Features
 
 - Displays `Double` values in a line chart
-- Support value serie (by default) or time serie as x axis
+- Support value serie (by default) or time serie
 - Add labels to each value (as `String`)
-- Add prefix and/or suffix to displayed data (as `42 kg` for example)
+- Add prefix and/or suffix to displayed data (as "42 kg" for example)
 - Change label (value) and secondary label colors
 - Change labels alignment (left, center, right)
 - Change number of digits after decimal point
@@ -23,7 +26,7 @@ It is really easy to use and to add to your app. It only takes an array of `Line
 ## Value serie or time serie as x axis
 By default, all values are displayed on x axis with equal distance between them (value serie). But you can also provide a timestamp (`Date` object) for each value. In this case, values are displayed on x axis depending on timestamp. For example, if you have 3 values with timestamps 03:00, 03:30 and 08:00, space between first and second one will be smaller than space between second and third one. It lets you display a line chart as time serie instead of just a value serie.
 
-To set your chart as a time serie, simply set `timestamp` value for each of your `LineChartData`. Warning: All your `LineChartData` must have a `timestamp` to display chart as time serie. If one of them does not have it, it falls back to default value serie.
+To set your chart as a time serie, simply set `dataTimestamps` parameter with an array of `Date` (one for each point).
 
 ## Examples
 
@@ -64,17 +67,10 @@ In file you want to add a chart:
 import LineChartView
 ```
 
-First create a `LineChartParameters` and set parameters to customize your chart. Only first `data` parameter is mandatory to provide your values (as an array of `LineChartData`):
+First create a `LineChartParameters` and set parameters to customize your chart. Only first `data` parameter is mandatory to provide your values (as an array of `Double`):
 
 ```swift
-let chartParameters = LineChartParameters(
-    data: [
-        LineChartData(42),
-        LineChartData(25.8),
-        LineChartData(88.19),
-        LineChartData(15.0),
-    ]
-)
+let chartParameters = LineChartParameters(data: [42.0, 25.8, 88.19, 15.0])
 ```
 
 Then create a `LineChartView` by passing your `LineChartParameter`:
@@ -92,18 +88,12 @@ import SwiftUI
 import LineChartView
 
 struct ContentView: View {
-    private let data: [LineChartData] = [
-        LineChartData(42, label: "The answer"),
-        LineChartData(25.8, label: "Any text here"),
-        LineChartData(88.19, label: "2021-11-21"),
-        LineChartData(15.0, label: "My number"),
-    ]
+    
+    private let data: [Double] = [42.0, 25.8, 88.19, 15.0]
+    private let labels: [String] = ["The answer", "Any text here", "2021-11-21", "My number"]
     
     var body: some View {
-        let chartParameters = LineChartParameters(
-            data: data
-        )
-        
+        let chartParameters = LineChartParameters(data: data, dataLabels: labels)
         LineChartView(lineChartParameters: chartParameters)
             .frame(height: 300)
     }
@@ -117,29 +107,23 @@ import SwiftUI
 import LineChartView
 
 struct ContentView: View {
-    private let data: [LineChartData]
-    
-    init() {
+    private let data: [Double] = [42.0, 25.8, 88.19, 15.0]
+    private var timestamps: [Date] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         
-        let dates = [
-            formatter.date(from: "2021/12/10 10:00")!,
-            formatter.date(from: "2021/12/10 10:05")!,
-            formatter.date(from: "2021/12/10 10:18")!,
-            formatter.date(from: "2021/12/10 11:01")!
-        ]
-        
-        data = [
-            LineChartData(42.0, timestamp: dates[0], label: dates[0].formatted(date: .numeric, time: .standard)),
-            LineChartData(25.8, timestamp: dates[1], label: dates[1].formatted(date: .numeric, time: .standard)),
-            LineChartData(88.19, timestamp: dates[2], label: dates[2].formatted(date: .numeric, time: .standard)),
-            LineChartData(15.0, timestamp: dates[3], label: dates[3].formatted(date: .numeric, time: .standard))
-        ]
+        var dates = [Date]()
+        dates.append(formatter.date(from: "2021/12/10 10:00")!)
+        dates.append(formatter.date(from: "2021/12/10 10:05")!)
+        dates.append(formatter.date(from: "2021/12/10 10:18")!)
+        dates.append(formatter.date(from: "2021/12/10 11:01")!)
+        return dates
     }
     
     var body: some View {
-        let chartParameters = LineChartParameters(data: data)
+        let chartParameters = LineChartParameters(data: data,
+                                                  dataTimestamps: timestamps,
+                                                  dataLabels: timestamps.map({ $0.formatted(date: .numeric, time: .standard) }))
         LineChartView(lineChartParameters: chartParameters)
             .frame(height: 300)
     }
@@ -150,7 +134,9 @@ struct ContentView: View {
 
 To customize your chart, you can set parameters of `LineChartParameters`. Here are explanations of each parameter:
 
-- `data`: (mandatory) Array of `LineChartData` containing values to display, timestamp (option) and/or label (option)
+- `data`: (mandatory) Array of `Double` containing values to display
+- `dataTimestamps`: Array of `Date` containing timestamp for each value (time serie). This array must have same number of items than `data` array. Set to nil to display default value serie.
+- `dataLabels`: Array of `String` containing label for each value
 - `labelColor`: Color of values text
 - `secondaryLabelColor`: Color of labels text
 - `labelsAlignment`: `.left`, `.center`, `.right` to align both labels above chart
@@ -171,6 +157,8 @@ Example of a complete `LineChartParameters`:
 ```swift
 let chartParameters = LineChartParameters(
     data: data,
+    dataTimestamps: timestamps,
+    dataLabels: labels,
     labelColor: .primary,
     secondaryLabelColor: .secondary,
     labelsAlignment: .left,
@@ -187,6 +175,12 @@ let chartParameters = LineChartParameters(
     hapticFeedback: true
 )
 ```
+
+## I'm working on...
+
+🚧 Developer at work 🚧
+
+- Animation when line is drawn ([issue #2](https://github.com/Jonathan-Gander/LineChartView/issues/2))
 
 ## They're already using it
 

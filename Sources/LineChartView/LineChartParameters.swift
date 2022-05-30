@@ -12,9 +12,7 @@ import SwiftUI
 public class LineChartParameters {
     
     // MARK: - Data
-    public var data: [Double]
-    public var dataTimestamps: [Date]?
-    public var dataLabels: [String]?
+    private var data: [LineChartData]
     
     // MARK: - Style
     public var labelColor: Color
@@ -39,10 +37,26 @@ public class LineChartParameters {
     public var dragGesture: Bool = true
     public var hapticFeedback: Bool = false
     
-    public init(
-        data: [Double],
-        dataTimestamps: [Date]? = nil, // A timestamp for each data value. If set, will draw x values according to timestamps. This array has to have exact same number of items as data array.
-        dataLabels: [String]? = nil,
+    
+    // MARK: - Computed properties
+    var dataValues: [Double] {
+        data.map({ $0.value })
+    }
+    
+    var dataLabels: [String?] {
+        data.map({ $0.label })
+    }
+    
+    var dataTimestamps: [Date]? {
+        let allTimestamps = data.filter({ $0.timestamp != nil }).map({ $0.timestamp! })
+        if allTimestamps.count == dataValues.count {
+            return allTimestamps
+        }
+        return nil
+    }
+    
+    public init (
+        data: [LineChartData],
         
         labelColor: Color = .primary,
         secondaryLabelColor: Color = .secondary,
@@ -66,13 +80,6 @@ public class LineChartParameters {
         hapticFeedback: Bool = false
     ) {
         self.data = data
-        
-        // dataTimestamps must have same number of items than data array
-        if dataTimestamps != nil && dataTimestamps!.count == data.count {
-            self.dataTimestamps = dataTimestamps
-        }
-        
-        self.dataLabels = dataLabels
         self.labelColor = labelColor
         self.secondaryLabelColor = secondaryLabelColor
         self.labelsAlignment = labelsAlignment
