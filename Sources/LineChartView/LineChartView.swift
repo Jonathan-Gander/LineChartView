@@ -18,7 +18,7 @@ public struct LineChartView: View {
     }
     
     public var body: some View {
-        if lineChartParameters.data.count > 0 {
+        if lineChartParameters.dataValues.count > 0 {
             VStack {
                 if lineChartParameters.dragGesture {
                     ChartLabels(lineChartParameters: lineChartParameters, indexPosition: $indexPosition)

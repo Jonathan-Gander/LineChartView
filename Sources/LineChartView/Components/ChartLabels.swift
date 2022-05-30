@@ -19,15 +19,13 @@ public struct ChartLabels: View {
     
     @Binding var indexPosition: Int  // Data point position
     
-    private var labels: [String] = []
+    private var labels: [String?] = []
     
     public init(lineChartParameters: LineChartParameters, indexPosition: Binding<Int>) {
         self.lineChartParameters = lineChartParameters
         self._indexPosition = indexPosition
         
-        if lineChartParameters.dataLabels != nil {
-            labels = lineChartParameters.dataLabels!
-        }
+        labels = lineChartParameters.dataLabels
     }
     
     public var body: some View {
@@ -39,14 +37,14 @@ public struct ChartLabels: View {
             }
             
             VStack(alignment: lineChartParameters.labelsAlignment == .left ? .leading : lineChartParameters.labelsAlignment == .right ? .trailing : .center) {
-                if  lineChartParameters.data.count > indexPosition {
+                if  lineChartParameters.dataValues.count > indexPosition {
                     if #available(iOS 15.0, *) {
-                        Text("\(lineChartParameters.dataPrefix ?? "")\(lineChartParameters.data[indexPosition].formatted(.number.precision(.fractionLength(lineChartParameters.dataPrecisionLength))))\(lineChartParameters.dataSuffix ?? "")")
+                        Text("\(lineChartParameters.dataPrefix ?? "")\(lineChartParameters.dataValues[indexPosition].formatted(.number.precision(.fractionLength(lineChartParameters.dataPrecisionLength))))\(lineChartParameters.dataSuffix ?? "")")
                             .foregroundColor(lineChartParameters.labelColor)
                             .font(.title)
                             .fontWeight(.bold)
                     } else {
-                        Text(String(format: "%.2f", lineChartParameters.data[indexPosition]))
+                        Text(String(format: "%.2f", lineChartParameters.dataValues[indexPosition]))
                             .foregroundColor(lineChartParameters.labelColor)
                             .font(.title)
                             .fontWeight(.bold)
@@ -54,10 +52,11 @@ public struct ChartLabels: View {
                 }
             
                 if labels.count > indexPosition {
-                    let label = labels[indexPosition]
-                    Text(label)
-                        .foregroundColor(lineChartParameters.secondaryLabelColor)
-                        .font(.caption)
+                    if let label = labels[indexPosition] {
+                        Text(label)
+                            .foregroundColor(lineChartParameters.secondaryLabelColor)
+                            .font(.caption)
+                    }
                 }
             }
             if lineChartParameters.labelsAlignment == .left {
