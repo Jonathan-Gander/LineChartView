@@ -4,7 +4,7 @@
 
 It is really easy to use and to add to your app. It only takes an array of `LineChartData` as mandatory parameter. All other parameters are here to customize visual aspect and interactions.
 
-IMPORTANT: If you're using versions under `1.3` please read documentation [here](https://github.com/Jonathan-Gander/LineChartView/blob/main/README-previous-v1.3.md).
+IMPORTANT: If you're using versions under `1.3.0` please read documentation [here](https://github.com/Jonathan-Gander/LineChartView/blob/main/README-previous-v1.3.md).
 
 ## Features
 
