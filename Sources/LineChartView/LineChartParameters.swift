@@ -9,7 +9,14 @@
 
 import SwiftUI
 
+
+
 public class LineChartParameters {
+    
+    public enum DisplayMode {
+        case `default`
+        case noValues // Display 'label' instead of 'value' (from LineChartData) in main label
+    }
     
     // MARK: - Data
     private var data: [LineChartData]
@@ -32,6 +39,8 @@ public class LineChartParameters {
     public var lineWidth: CGFloat
     
     public var dotsWidth: CGFloat
+    
+    public var displayMode: DisplayMode
     
     // MARK: - Interactions
     public var dragGesture: Bool = true
@@ -76,6 +85,8 @@ public class LineChartParameters {
         
         dotsWidth: CGFloat = -1, // Set it to a value > 0 to display dots
         
+        displayMode: DisplayMode = .default,
+        
         dragGesture: Bool = true,
         hapticFeedback: Bool = false
     ) {
@@ -92,6 +103,7 @@ public class LineChartParameters {
         self.lineSecondColor = lineSecondColor == nil ? lineColor : lineSecondColor!
         self.lineWidth = lineWidth
         self.dotsWidth = dotsWidth
+        self.displayMode = displayMode
         self.dragGesture = dragGesture
         self.hapticFeedback = hapticFeedback
     }

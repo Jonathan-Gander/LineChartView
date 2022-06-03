@@ -18,6 +18,7 @@ IMPORTANT: If you're using versions under `1.3.0` please read documentation [her
 - Change indicator point color and size
 - Change line color (simple color or linear gradient with two colors)
 - Display dots for each point/value on line
+- Change display mode: value + label, or only label (as main label)
 - Enable/disable drag gesture
 - Enable/disable haptic feedback when drag on exact value
 - Use SwiftUI modifiers to customize chart (like background or frame size)
@@ -165,6 +166,7 @@ To customize your chart, you can set parameters of `LineChartParameters`. Here a
 - `lineSecondColor`: If set, will display a linear gradient from left to right from `lineColor` to `lineSecondColor`
 - `lineWidth`: Line width
 - `dotsWidth`: Display a dot for each value (set to `-1` to hide dots)
+- `displayMode`: Choose how values and labels are displayed
 - `dragGesture`: Enable or disable drag gesture on chart
 - `hapticFeedback`: Enable or disable haptic feedback on each value point
 
@@ -185,6 +187,7 @@ let chartParameters = LineChartParameters(
     lineSecondColor: .purple,
     lineWidth: 3,
     dotsWidth: 8,
+    displayMode: .default,
     dragGesture: true,
     hapticFeedback: true
 )
